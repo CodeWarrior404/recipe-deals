@@ -1,0 +1,14 @@
+@import '../../styles/configuration.scss';
+
+#recipe-paste-area {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 300px;
+}
+
+.data-label {
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  color: $label-color;
+}

@@ -1,4 +1,12 @@
+@import 'styles/primeng-custom.scss';
 
-* {
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
   font-family: Roboto, Arial, sans-serif;
+  color: #888;
 }
