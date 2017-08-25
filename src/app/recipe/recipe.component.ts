@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-recipe',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit {
+  @Output() onRecipeChange = new EventEmitter<string>();
   pastedRecipe: string;
 
   constructor() { }
@@ -14,7 +15,7 @@ export class RecipeComponent implements OnInit {
   }
 
   findDealsClickHandler(): void {
-    console.log(this.pastedRecipe);
+    this.onRecipeChange.emit(this.pastedRecipe ? this.pastedRecipe : '');
   }
 
 }
