@@ -2,3 +2,12 @@
 .ui-panel {
   height: 100%;
 }
+
+.ui-panel-content-wrapper {
+  height: calc(100% - 40px);
+}
+
+.ui-panel-content {
+  height: 100%;
+  overflow: auto;
+}
