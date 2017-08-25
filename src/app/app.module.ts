@@ -8,6 +8,8 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DealsComponent } from './deals/deals.component';
 import { ButtonModule, InputTextareaModule, PanelModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { DataService } from './services/data.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,15 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpModule,
     FormsModule,
     PanelModule,
     InputTextareaModule,
     ButtonModule
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
