@@ -5,16 +5,20 @@
     <!--<p-panel [header]="category" *ngFor="let category of categoryListToDisplay">-->
     <!--</p-panel>-->
 
-    <div *ngFor="let ingredient of ingredients" [hidden]="categoryListToDisplay.indexOf(ingredient.cat) < 0 || !ingredient.icon_url || ingredient.icon_url === ''">
+    <div *ngFor="let ingredient of ingredients" [hidden]="shouldIngredientBeHidden(ingredient)">
 
       <div class="ui-g">
-        <div class="ui-g-2">
+        <div class="ui-g-3">
           <img [src]="ingredient.icon_url" width="40">
         </div>
         <div class="ui-g-4 ingredient-name-cell">
           {{ingredient.name}}
         </div>
-        <div class="ui-g-3">
+        <div class="ui-g-3 ingredient-button-cell">
+          <div *ngIf="ingredient.flyers">
+            <i class="fa fa-money"></i>
+            <i class="fa fa-chevron-right"></i>
+          </div>
         </div>
       </div>
 

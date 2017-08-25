@@ -1,3 +1,4 @@
+import { Flyer } from './flyer';
 
 export interface Ingredient {
   name: string;
@@ -8,4 +9,6 @@ export interface Ingredient {
   icon_asset_name: string;
   is_clean: boolean;
   priority_rank: number
+
+  flyers?: Flyer[];
 }

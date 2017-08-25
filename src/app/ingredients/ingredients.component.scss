@@ -1,3 +1,16 @@
 .ingredient-name-cell {
   margin: auto;
 }
+
+.ingredient-button-cell {
+  margin: auto;
+
+  .fa-money {
+    color: green;
+    font-size: 20px;
+  }
+
+  .fa-chevron-right {
+    color: #186ba0;
+  }
+}
