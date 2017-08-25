@@ -10,12 +10,16 @@ This app is powered by api calls provided by [Flipp](https://flipp.com)
 
 ## How to use
 
-* Navigate to any recipe site and find the recipe for your favorite dish, say, [Chicken with Artichokes](http://www.bhg.com/recipe/chicken/chicken-with-artichokes/).  
-* Copy the directions and paste it in the recipe text area in this app.  
-* Click on `Find Deals` button.  
-* Now, you'll see all the ingredients listed out in the Ingredients panel.  
-* If there are any offers or promotions available, you will see a money icon.  
+* Navigate to any recipe site and find the recipe for your favorite dish, say, [Chicken with Artichokes](http://www.bhg.com/recipe/chicken/chicken-with-artichokes/).
+![Recipe for Chicken with Artichokes](https://github.com/CodeWarrior404/recipe-deals/raw/master/readme-assets/00100.png)  
+* Copy the recipe instructions and paste it in the recipe text area in this app. Also enter your zip code.
+![Paste recipe screenshot](https://github.com/CodeWarrior404/recipe-deals/raw/master/readme-assets/00200.png) 
+* Click on `Find Deals` button.
+![Find Deals screenshot](https://github.com/CodeWarrior404/recipe-deals/raw/master/readme-assets/00300.png)  
+* Now, you'll see all the ingredients listed out in the Ingredients panel. If there are any offers or promotions available, you will see a money icon.
+![Ingredients screenshot](https://github.com/CodeWarrior404/recipe-deals/raw/master/readme-assets/00400.png)  
 * Click on the item and you will see a list of all offers and promotions related to your item.
+![Offers screenshot](https://github.com/CodeWarrior404/recipe-deals/raw/master/readme-assets/00500.png)
 
 ## Development server
 
