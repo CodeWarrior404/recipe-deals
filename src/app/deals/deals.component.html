@@ -1,13 +1,15 @@
-<div>
+<p-panel [header]="!ingredient ? 'Offers' : ingredient.flyers ? ingredient.flyers.length + ' offer(s) for ' + ingredient.name : 'No offers for ' + ingredient.name">
+
   <div *ngIf="ingredient">
     <div *ngIf="ingredient.flyers">
-      {{ingredient.flyers.length}} offer(s) found
-    </div>
-    <div *ngIf="!ingredient.flyers">
-      No offers found
+      <div *ngFor="let flyer of ingredient.flyers">
+        <img [src]="flyer.clipping_image_url" width="100%">
+      </div>
     </div>
   </div>
   <div *ngIf="!ingredient">
     Select an Ingredient to see offers
   </div>
-</div>
+
+</p-panel>
+
