@@ -1,0 +1,10 @@
+@import '../../styles/configuration.scss';
+
+.data-label {
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  color: $label-color;
+
+  padding-bottom: 5px;
+}
