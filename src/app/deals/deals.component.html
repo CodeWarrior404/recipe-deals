@@ -1,3 +1,13 @@
-<p>
-  deals works!
-</p>
+<div>
+  <div *ngIf="ingredient">
+    <div *ngIf="ingredient.flyers">
+      {{ingredient.flyers.length}} offer(s) found
+    </div>
+    <div *ngIf="!ingredient.flyers">
+      No offers found
+    </div>
+  </div>
+  <div *ngIf="!ingredient">
+    Select an Ingredient to see offers
+  </div>
+</div>

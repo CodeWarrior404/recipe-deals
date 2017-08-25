@@ -3,9 +3,9 @@
     <app-recipe (onRecipeChange)="recipeChangeHandler($event)"></app-recipe>
   </div>
   <div class="ui-g-4">
-    <app-ingredients [recipe]="recipe"></app-ingredients>
+    <app-ingredients [recipe]="recipe" (onIngredientSelect)="ingredientSelectionHandler($event)"></app-ingredients>
   </div>
   <div class="ui-g-3">
-    <app-deals></app-deals>
+    <app-deals [ingredient]="ingredient"></app-deals>
   </div>
 </div>

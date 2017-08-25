@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Ingredient } from '../models/ingredient';
 import { Flyer } from '../models/flyer';
@@ -10,6 +10,7 @@ import { Flyer } from '../models/flyer';
 })
 export class IngredientsComponent implements OnInit, OnChanges {
   @Input() recipe: string;
+  @Output() onIngredientSelect = new EventEmitter<Ingredient>();
   ingredients: Ingredient[];
   selectedIngredient: Ingredient;
   ignoreList: any;
@@ -29,6 +30,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
     if (changes && changes.recipe && this.recipe) {
       this.ingredients = null;
       this.selectedIngredient = null;
+      this.onIngredientSelect.emit();
       const ingredients: string[] = this.createListOfIngredientsFromRecipe(this.recipe);
       this.dataService.getIngredientDetails(ingredients)
         .subscribe(data => {
@@ -70,6 +72,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
 
   ingredientClickHandler(ingredient: Ingredient): void {
     this.selectedIngredient = ingredient;
+    this.onIngredientSelect.emit(ingredient);
   }
 
 }
