@@ -17,7 +17,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Deli'];
-    this.ignoreList = { 'and': true, 'large': true, 'small': true };
+    this.ignoreList = { and: true, large: true, small: true, stir: true, sprinkle: true };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -34,19 +34,15 @@ export class IngredientsComponent implements OnInit, OnChanges {
   }
 
   private createListOfIngredientsFromRecipe(recipe: string): string[] {
-    recipe = recipe.replace(/[&\/\\#,+()$~%.'":*?<>{}_@\r\n]/g, ' ');
-    console.log(recipe);
-    console.log(recipe.split(' '));
+    recipe = recipe.replace(/[&\/\\#,+()$~%.'":*?<>{}_@;\r\n]/g, ' ');
     const ingredientArray: string[] = recipe.split(' ');
     const ingredientMap: any = {};
 
     for (const ingredient of ingredientArray) {
-      if (ingredient.length > 2 && !ingredientMap[ingredient] && !this.ignoreList[ingredient]) {
+      if (ingredient.length > 2 && !ingredientMap[ingredient] && !this.ignoreList[ingredient.toLowerCase()]) {
         ingredientMap[ingredient] = true;
       }
     }
-
-    console.log(11111, Object.keys(ingredientMap));
 
     return Object.keys(ingredientMap);
   }

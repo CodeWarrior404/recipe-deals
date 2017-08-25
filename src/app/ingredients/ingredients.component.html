@@ -1,3 +1,24 @@
-<p>
-  {{recipe}}
-</p>
+<p-panel header="Ingredients">
+
+  <div *ngIf="ingredients">
+
+    <!--<p-panel [header]="category" *ngFor="let category of categoryListToDisplay">-->
+    <!--</p-panel>-->
+
+    <div *ngFor="let ingredient of ingredients" [hidden]="categoryListToDisplay.indexOf(ingredient.cat) < 0 || !ingredient.icon_url || ingredient.icon_url === ''">
+
+      <div class="ui-g">
+        <div class="ui-g-2">
+          <img [src]="ingredient.icon_url" width="40">
+        </div>
+        <div class="ui-g-4">
+          {{ingredient.name}}
+        </div>
+        <div class="ui-g-3">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</p-panel>
