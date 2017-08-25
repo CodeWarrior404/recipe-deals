@@ -1,7 +1,16 @@
-<p-panel header="Recipe">
+<p-panel>
+
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Custom Header</span>
+
+      <button pButton type="button" style="float: right;" icon="fa-chevron-right" iconPos="right"
+              label="Find Deals" (click)="findDealsClickHandler()"></button>
+    </div>
+  </p-header>
+
   <div class="data-label">
     Paste your recipe here
   </div>
-  <textarea id="recipe-paste-area" #recipePasteTextBox pInputTextarea
-            (keyup)="pastedRecipeChangeHandler(recipePasteTextBox.value)"></textarea>
+  <textarea id="recipe-paste-area" #recipePasteTextBox pInputTextarea [(ngModel)]="pastedRecipe"></textarea>
 </p-panel>

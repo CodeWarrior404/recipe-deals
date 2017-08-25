@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeComponent } from './recipe/recipe.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DealsComponent } from './deals/deals.component';
-import { InputTextareaModule, PanelModule } from 'primeng/primeng';
+import { ButtonModule, InputTextareaModule, PanelModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     PanelModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
