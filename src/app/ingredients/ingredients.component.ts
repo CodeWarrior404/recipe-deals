@@ -23,7 +23,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Deli'];
     // List of words to ignore
     this.ignoreList = { add: true, and: true, information: true, large: true, nutrition: true, servings: true,
-      small: true, sprinkle: true, stir: true, the: true, them: true, total: true };
+      small: true, sprinkle: true, stir: true, the: true, them: true, total: true, with: true };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -53,7 +53,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
   }
 
   private createListOfIngredientsFromRecipe(recipe: string): string[] {
-    recipe = recipe.replace(/[&\/\\#,+()$~%.'":*?<>{}_@;\r\n]/g, ' ');
+    recipe = recipe.replace(/[&\/\\#,+()$~%.'":*?<>{}_@;\-\r\n]/g, ' ');
     const ingredientArray: string[] = recipe.split(' ');
     const ingredientMap: any = {};
 
