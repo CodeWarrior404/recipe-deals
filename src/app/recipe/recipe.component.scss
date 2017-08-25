@@ -3,7 +3,7 @@
 #recipe-paste-area {
   margin-top: 10px;
   width: 100%;
-  min-height: 500px;
+  height: calc(100% - 40px) ;
 }
 
 .data-label {
