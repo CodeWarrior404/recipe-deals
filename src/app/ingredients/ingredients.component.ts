@@ -11,6 +11,7 @@ import { Flyer } from '../models/flyer';
 export class IngredientsComponent implements OnInit, OnChanges {
   @Input() recipe: string;
   ingredients: Ingredient[];
+  selectedIngredient: Ingredient;
   ignoreList: any;
   categoryListToDisplay: string[];
 
@@ -27,6 +28,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.recipe && this.recipe) {
       this.ingredients = null;
+      this.selectedIngredient = null;
       const ingredients: string[] = this.createListOfIngredientsFromRecipe(this.recipe);
       this.dataService.getIngredientDetails(ingredients)
         .subscribe(data => {
@@ -64,6 +66,10 @@ export class IngredientsComponent implements OnInit, OnChanges {
 
   shouldIngredientBeHidden(ingredient: Ingredient): boolean {
     return this.categoryListToDisplay.indexOf(ingredient.cat) < 0 || !ingredient.icon_url || ingredient.icon_url === '';
+  }
+
+  ingredientClickHandler(ingredient: Ingredient): void {
+    this.selectedIngredient = ingredient;
   }
 
 }
