@@ -8,7 +8,7 @@ import { Flyer } from '../models/flyer';
 @Injectable()
 export class DataService {
   url_findIngredientCategory = 'https://backflipp.wishabi.com/cat_dict?locale=en&all_attributes=true&terms=';
-  url_findFlyers = 'https://backflipp.wishabi.com/flipp/items/search?locale=en-us&postal_code=10011&q=';
+  url_findFlyers = 'https://backflipp.wishabi.com/flipp/items/search?locale=en-us&postal_code=';
 
   constructor(private http: Http) { }
 
@@ -22,9 +22,9 @@ export class DataService {
       .map(response => response.json().search_terms);
   }
 
-  getOffers(ingredient: string): Observable<Flyer[]> {
+  getOffers(ingredient: string, zipCode: string): Observable<Flyer[]> {
     return this.http
-      .get(this.url_findFlyers + ingredient)
+      .get(this.url_findFlyers + (zipCode ? zipCode : '75056') + '&q=' + ingredient)
       .map(response => response.json().items);
   }
 }

@@ -10,6 +10,7 @@ import { Flyer } from '../models/flyer';
 })
 export class IngredientsComponent implements OnInit, OnChanges {
   @Input() recipe: string;
+  @Input() zipCode: string;
   @Output() onIngredientSelect = new EventEmitter<Ingredient>();
   ingredients: Ingredient[];
   selectedIngredient: Ingredient;
@@ -28,28 +29,35 @@ export class IngredientsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes && changes.recipe && this.recipe) {
-      this.ingredients = null;
-      this.selectedIngredient = null;
-      this.onIngredientSelect.emit();
-      const ingredients: string[] = this.createListOfIngredientsFromRecipe(this.recipe);
-      this.dataService.getIngredientDetails(ingredients)
-        .subscribe(data => {
-          if (data && data.length > 0) {
-            this.ingredients = data;
+      setTimeout(() => this.processRecipe());
+    }
+    if (changes && changes.zipCode && this.recipe) {
+      setTimeout(() => this.processRecipe());
+    }
+  }
 
-            for (const ingredient of this.ingredients) {
-              if (!this.shouldIngredientBeHidden(ingredient)) {
-                this.dataService.getOffers(ingredient.name)
-                  .subscribe((flyers: Flyer[]) => {
-                    if (flyers && flyers.length > 0) {
-                      ingredient.flyers = flyers;
-                    }
-                  });
-              }
+  private processRecipe(): void {
+    this.ingredients = null;
+    this.selectedIngredient = null;
+    this.onIngredientSelect.emit();
+    const ingredients: string[] = this.createListOfIngredientsFromRecipe(this.recipe);
+    this.dataService.getIngredientDetails(ingredients)
+      .subscribe(data => {
+        if (data && data.length > 0) {
+          this.ingredients = data;
+
+          for (const ingredient of this.ingredients) {
+            if (!this.shouldIngredientBeHidden(ingredient)) {
+              this.dataService.getOffers(ingredient.name, this.zipCode)
+                .subscribe((flyers: Flyer[]) => {
+                  if (flyers && flyers.length > 0) {
+                    ingredient.flyers = flyers;
+                  }
+                });
             }
           }
-        });
-    }
+        }
+      });
   }
 
   private createListOfIngredientsFromRecipe(recipe: string): string[] {

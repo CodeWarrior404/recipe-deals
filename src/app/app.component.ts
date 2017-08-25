@@ -8,10 +8,12 @@ import { Ingredient } from './models/ingredient';
 })
 export class AppComponent {
   recipe: string;
+  zipCode: string;
   ingredient: Ingredient;
 
-  recipeChangeHandler(recipe: string): void {
-    this.recipe = recipe;
+  recipeChangeHandler(payload: any): void {
+    this.recipe = payload.recipe;
+    this.zipCode = payload.zip;
   }
 
   ingredientSelectionHandler(ingredient: Ingredient): void {

@@ -4,8 +4,14 @@
     <div class="ui-helper-clearfix">
       <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Recipe</span>
 
-      <button pButton type="button" style="float: right;" icon="fa-chevron-right" iconPos="right"
-              label="Find Deals" (click)="findDealsClickHandler()"></button>
+      <div style="float: right;">
+        <span class="data-label" style="padding-right: 5px;">
+          Zip
+        </span>
+        <input type="text" pInputText style="width: 80px;" [(ngModel)]="zipCode"/>
+        <button pButton type="button" icon="fa-chevron-right" iconPos="right"
+                label="Find Deals" (click)="findDealsClickHandler()"></button>
+      </div>
     </div>
   </p-header>
 
