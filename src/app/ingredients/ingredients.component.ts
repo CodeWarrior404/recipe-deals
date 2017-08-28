@@ -21,7 +21,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // Only display items that fall within these categories
-    this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Deli'];
+    this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Beverages', 'Bakery', 'Deli'];
     // List of words to ignore
     this.ignoreList = { add: true, and: true, information: true, large: true, nutrition: true, servings: true,
       small: true, sprinkle: true, stir: true, the: true, them: true, total: true, 'with': true };
