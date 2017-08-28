@@ -11,3 +11,13 @@
   height: 100%;
   overflow: auto;
 }
+
+.ui-state-active {
+  border-color: #0277BD;
+  background-color: #0277BD;
+  color: white;
+}
+
+.ui-state-active a {
+  color: white;
+}

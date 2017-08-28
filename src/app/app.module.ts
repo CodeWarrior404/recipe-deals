@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecipeComponent } from './recipe/recipe.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DealsComponent } from './deals/deals.component';
-import { ButtonModule, InputTextareaModule, InputTextModule, PanelModule } from 'primeng/primeng';
+import { AccordionModule, ButtonModule, InputTextareaModule, InputTextModule, PanelModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { DataService } from './services/data.service';
 import { HttpModule } from '@angular/http';
@@ -26,7 +26,8 @@ import { HttpModule } from '@angular/http';
     PanelModule,
     InputTextareaModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    AccordionModule
   ],
   providers: [
     DataService

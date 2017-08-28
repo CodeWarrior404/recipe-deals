@@ -2,14 +2,33 @@
 
   <div *ngIf="ingredient">
     <div *ngIf="ingredient.flyerClippings">
-      <div *ngFor="let flyer of ingredient.flyerClippings">
-        <a [href]="flyer.clipping_image_url" target="_blank" [title]="flyer.name" style="text-decoration: none;">
-          <div class="data-label">
-            {{flyer.name}}
-          </div>
-          <img [src]="flyer.clipping_image_url" width="100%">
-        </a>
-      </div>
+      <p-accordion [multiple]="true">
+        <div *ngFor="let flyer of ingredient.flyerClippings">
+
+          <p-accordionTab [selected]="true">
+            <p-header>
+              <div class="ui-helper-clearfix">
+                <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px;">
+                  {{flyer.merchant}}
+                </span>
+
+                <div style="float: right;">
+                  <img [src]="flyer.merchant_logo" height="20px">
+                </div>
+              </div>
+            </p-header>
+
+            <a [href]="flyer.clipping_image_url" target="_blank" [title]="flyer.name" style="text-decoration: none;">
+              <div class="data-label">
+                {{flyer.name}}
+              </div>
+              <img [src]="flyer.clipping_image_url" width="100%">
+            </a>
+
+          </p-accordionTab>
+
+        </div>
+      </p-accordion>
     </div>
   </div>
   <div *ngIf="!ingredient">
