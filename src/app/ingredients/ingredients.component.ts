@@ -24,7 +24,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Deli'];
     // List of words to ignore
     this.ignoreList = { add: true, and: true, information: true, large: true, nutrition: true, servings: true,
-      small: true, sprinkle: true, stir: true, the: true, them: true, total: true, with: true };
+      small: true, sprinkle: true, stir: true, the: true, them: true, total: true, 'with': true };
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -66,8 +66,8 @@ export class IngredientsComponent implements OnInit, OnChanges {
     const ingredientMap: any = {};
 
     for (const ingredient of ingredientArray) {
-      if (ingredient.length > 2 && !ingredientMap[ingredient] && !this.ignoreList[ingredient.toLowerCase()]) {
-        ingredientMap[ingredient] = true;
+      if (ingredient.length > 2 && !ingredientMap[ingredient.toLowerCase()] && !this.ignoreList[ingredient.toLowerCase()]) {
+        ingredientMap[ingredient.toLowerCase()] = true;
       }
     }
 
