@@ -44,7 +44,9 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.dataService.getIngredientDetails(ingredients)
       .subscribe(data => {
         if (data && data.length > 0) {
-          this.ingredients = this.removeDuplicateIngredients(data);
+          this.ingredients = data;
+          this.ingredients = this.removeDuplicateIngredients(this.ingredients);
+          this.ingredients = this.removeIngredientsThatCanBeHidden(this.ingredients);
 
           for (const ingredient of this.ingredients) {
             if (!this.shouldIngredientBeHidden(ingredient)) {
@@ -73,6 +75,20 @@ export class IngredientsComponent implements OnInit, OnChanges {
     return ingredients;
   }
 
+  private removeIngredientsThatCanBeHidden(ingredients: Ingredient[]): Ingredient[] {
+    for (let i = ingredients.length - 1; i >= 0; i--) {
+      if (this.shouldIngredientBeHidden(ingredients[i])) {
+        // Non Edible Ingredient
+        ingredients.splice(i, 1);
+      }
+    }
+    return ingredients;
+  }
+
+  private shouldIngredientBeHidden(ingredient: Ingredient): boolean {
+    return this.categoryListToDisplay.indexOf(ingredient.cat) < 0 || !ingredient.icon_url || ingredient.icon_url === '';
+  }
+
   private createListOfIngredientsFromRecipe(recipe: string): string[] {
     recipe = recipe.replace(/[&\/\\#,+()$~%.'":*?<>{}_@;\-\r\n]/g, ' ');
     const ingredientArray: string[] = recipe.split(' ');
@@ -85,10 +101,6 @@ export class IngredientsComponent implements OnInit, OnChanges {
     }
 
     return Object.keys(ingredientMap);
-  }
-
-  shouldIngredientBeHidden(ingredient: Ingredient): boolean {
-    return this.categoryListToDisplay.indexOf(ingredient.cat) < 0 || !ingredient.icon_url || ingredient.icon_url === '';
   }
 
   ingredientClickHandler(ingredient: Ingredient): void {
