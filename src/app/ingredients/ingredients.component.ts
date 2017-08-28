@@ -44,7 +44,7 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.dataService.getIngredientDetails(ingredients)
       .subscribe(data => {
         if (data && data.length > 0) {
-          this.ingredients = data;
+          this.ingredients = this.removeDuplicateIngredients(data);
 
           for (const ingredient of this.ingredients) {
             if (!this.shouldIngredientBeHidden(ingredient)) {
@@ -58,6 +58,19 @@ export class IngredientsComponent implements OnInit, OnChanges {
           }
         }
       });
+  }
+
+  private removeDuplicateIngredients(ingredients: Ingredient[]): Ingredient[] {
+    const priorityRankMap = {};
+    for (let i = ingredients.length - 1; i >= 0; i--) {
+      if (priorityRankMap[ingredients[i].priority_rank]) {
+        // Duplicate found
+        ingredients.splice(i, 1);
+      } else {
+        priorityRankMap[ingredients[i].priority_rank] = true;
+      }
+    }
+    return ingredients;
   }
 
   private createListOfIngredientsFromRecipe(recipe: string): string[] {
