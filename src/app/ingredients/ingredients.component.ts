@@ -4,6 +4,7 @@ import { Ingredient } from '../models/ingredient';
 import { FlyerClipping } from '../models/flyer-clipping';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
+import { Flyer } from '../models/flyer';
 
 @Component({
   selector: 'app-ingredients',
@@ -52,25 +53,33 @@ export class IngredientsComponent implements OnInit, OnChanges {
         const zipCodeData = data[0];
         const ingredientsData = data[1];
         if (ingredientsData && ingredientsData.length > 0) {
-          this.processIngredientsDataForDisplay(ingredientsData);
+          this.ingredients = this.processIngredientsDataForDisplay(ingredientsData, zipCodeData.flyers);
         }
     });
   }
 
-  private processIngredientsDataForDisplay(ingredientsData: Ingredient[]): void {
-    this.ingredients = ingredientsData;
-    this.ingredients = this.removeDuplicateIngredients(this.ingredients);
-    this.ingredients = this.removeIngredientsThatCanBeHidden(this.ingredients);
-    for (const ingredient of this.ingredients) {
+  private processIngredientsDataForDisplay(ingredients: Ingredient[], flyers: Flyer[]): Ingredient[] {
+    const flyerIdMap = {};
+    for (const flyer of flyers) {
+      flyerIdMap[flyer.id] = flyer;
+    }
+    ingredients = this.removeDuplicateIngredients(ingredients);
+    ingredients = this.removeIngredientsThatCanBeHidden(ingredients);
+    for (const ingredient of ingredients) {
       if (!this.shouldIngredientBeHidden(ingredient)) {
         this.dataService.getOffers(ingredient.name, this.zipCode)
-          .subscribe((flyers: FlyerClipping[]) => {
-            if (flyers && flyers.length > 0) {
-              ingredient.flyerClippings = flyers;
+          .subscribe((flyerClippings: FlyerClipping[]) => {
+            if (flyerClippings && flyerClippings.length > 0) {
+              for (const flyerClipping of flyerClippings) {
+                flyerClipping.merchant = (<Flyer> flyerIdMap[flyerClipping.flyer_id]).merchant;
+                flyerClipping.merchant_logo = (<Flyer> flyerIdMap[flyerClipping.flyer_id]).merchant_logo;
+              }
+              ingredient.flyerClippings = flyerClippings;
             }
           });
       }
     }
+    return ingredients;
   }
 
   private removeDuplicateIngredients(ingredients: Ingredient[]): Ingredient[] {
