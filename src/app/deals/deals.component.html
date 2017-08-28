@@ -1,8 +1,8 @@
-<p-panel [header]="!ingredient ? 'Offers' : ingredient.flyers ? ingredient.flyers.length + ' offer(s) for ' + ingredient.name : 'No offers for ' + ingredient.name">
+<p-panel [header]="!ingredient ? 'Offers' : ingredient.flyerClippings ? ingredient.flyerClippings.length + ' offer(s) for ' + ingredient.name : 'No offers for ' + ingredient.name">
 
   <div *ngIf="ingredient">
-    <div *ngIf="ingredient.flyers">
-      <div *ngFor="let flyer of ingredient.flyers">
+    <div *ngIf="ingredient.flyerClippings">
+      <div *ngFor="let flyer of ingredient.flyerClippings">
         <a [href]="flyer.clipping_image_url" target="_blank" [title]="flyer.name" style="text-decoration: none;">
           <div class="data-label">
             {{flyer.name}}

@@ -1,4 +1,4 @@
-import { Flyer } from './flyer';
+import { FlyerClipping } from './flyer-clipping';
 
 export interface Ingredient {
   name: string;
@@ -10,5 +10,5 @@ export interface Ingredient {
   is_clean: boolean;
   priority_rank: number
 
-  flyers?: Flyer[];
+  flyerClippings?: FlyerClipping[];
 }

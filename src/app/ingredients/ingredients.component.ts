@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Ingredient } from '../models/ingredient';
-import { Flyer } from '../models/flyer';
+import { FlyerClipping } from '../models/flyer-clipping';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
   selector: 'app-ingredients',
@@ -41,25 +43,34 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.selectedIngredient = null;
     this.onIngredientSelect.emit();
     const ingredients: string[] = this.createListOfIngredientsFromRecipe(this.recipe);
-    this.dataService.getIngredientDetails(ingredients)
-      .subscribe(data => {
-        if (data && data.length > 0) {
-          this.ingredients = data;
-          this.ingredients = this.removeDuplicateIngredients(this.ingredients);
-          this.ingredients = this.removeIngredientsThatCanBeHidden(this.ingredients);
 
-          for (const ingredient of this.ingredients) {
-            if (!this.shouldIngredientBeHidden(ingredient)) {
-              this.dataService.getOffers(ingredient.name, this.zipCode)
-                .subscribe((flyers: Flyer[]) => {
-                  if (flyers && flyers.length > 0) {
-                    ingredient.flyers = flyers;
-                  }
-                });
-            }
-          }
+    Observable.forkJoin([
+      this.dataService.getAllDataForZip(this.zipCode),
+      this.dataService.getIngredientDetails(ingredients)
+    ])
+      .subscribe(data => {
+        const zipCodeData = data[0];
+        const ingredientsData = data[1];
+        if (ingredientsData && ingredientsData.length > 0) {
+          this.processIngredientsDataForDisplay(ingredientsData);
         }
-      });
+    });
+  }
+
+  private processIngredientsDataForDisplay(ingredientsData: Ingredient[]): void {
+    this.ingredients = ingredientsData;
+    this.ingredients = this.removeDuplicateIngredients(this.ingredients);
+    this.ingredients = this.removeIngredientsThatCanBeHidden(this.ingredients);
+    for (const ingredient of this.ingredients) {
+      if (!this.shouldIngredientBeHidden(ingredient)) {
+        this.dataService.getOffers(ingredient.name, this.zipCode)
+          .subscribe((flyers: FlyerClipping[]) => {
+            if (flyers && flyers.length > 0) {
+              ingredient.flyerClippings = flyers;
+            }
+          });
+      }
+    }
   }
 
   private removeDuplicateIngredients(ingredients: Ingredient[]): Ingredient[] {
