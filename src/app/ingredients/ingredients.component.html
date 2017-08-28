@@ -8,7 +8,7 @@
     <div *ngFor="let ingredient of ingredients">
 
       <div class="ui-g ingredient-tile" (click)="ingredientClickHandler(ingredient)"
-           [style.background-color]="(selectedIngredient && selectedIngredient.name === ingredient.name) ? '#EDEFF2' : ''">
+           [style.background-color]="(selectedIngredient && selectedIngredient.name === ingredient.name) ? '#B3E5FC' : ''">
         <div class="ui-g-3">
           <img [src]="ingredient.icon_url" width="40">
         </div>
