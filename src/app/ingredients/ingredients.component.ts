@@ -27,7 +27,8 @@ export class IngredientsComponent implements OnInit, OnChanges {
     this.categoryListToDisplay = ['Pantry', 'Produce', 'Dairy & Eggs', 'Meat & Seafood', 'Frozen', 'Beverages', 'Bakery', 'Deli'];
     // List of words to ignore
     this.ignoreList = { add: true, and: true, information: true, large: true, nutrition: true, servings: true,
-      small: true, sprinkle: true, stir: true, the: true, them: true, total: true, 'with': true };
+      small: true, sprinkle: true, stir: true, the: true, them: true, total: true, 'with': true, knead: true, each: true,
+      roll: true };
   }
 
   ngOnChanges(changes: SimpleChanges) {
