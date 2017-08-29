@@ -10,6 +10,7 @@ import { AccordionModule, ButtonModule, InputTextareaModule, InputTextModule, Pa
 import { FormsModule } from '@angular/forms';
 import { DataService } from './services/data.service';
 import { HttpModule } from '@angular/http';
+import { IngredientsHelperService } from './services/ingredients-helper.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpModule } from '@angular/http';
     AccordionModule
   ],
   providers: [
-    DataService
+    DataService,
+    IngredientsHelperService
   ],
   bootstrap: [AppComponent]
 })
