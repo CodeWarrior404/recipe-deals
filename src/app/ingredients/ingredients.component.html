@@ -16,7 +16,10 @@
           {{ingredient.name}}
         </div>
         <div class="ui-g-3 ingredient-button-cell">
-          <div *ngIf="ingredient.flyerClippings">
+          <div *ngIf="!ingredient.flyerClippings">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="ingredient.flyerClippings && ingredient.flyerClippings.length > 0">
             <i class="fa fa-money"></i>
             <i class="fa fa-chevron-right"></i>
           </div>

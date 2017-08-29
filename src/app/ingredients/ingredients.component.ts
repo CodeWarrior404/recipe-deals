@@ -76,6 +76,8 @@ export class IngredientsComponent implements OnInit, OnChanges {
                 flyerClipping.merchant_logo = (<Flyer> flyerIdMap[flyerClipping.flyer_id]).merchant_logo;
               }
               ingredient.flyerClippings = flyerClippings;
+            } else {
+              ingredient.flyerClippings = [];
             }
           });
       }
